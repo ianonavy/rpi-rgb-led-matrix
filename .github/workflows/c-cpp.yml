@@ -20,3 +20,12 @@ jobs:
       run: make -B -C bindings/python/rgbmatrix
     - name: make
       run: make
+    - name: build python wheel
+      run: |
+        cd bindings/python/rgbmatrix
+        python3 setup.py bdist_wheel
+    - name: upload wheel to GitHub Packages
+      uses: actions/upload-artifact@v3
+      with:
+        name: python-wheel
+        path: bindings/python/rgbmatrix/dist/*.whl
